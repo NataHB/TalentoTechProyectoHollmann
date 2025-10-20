@@ -33,3 +33,26 @@
   color: #dc3545;
   cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .cart-item {
+    flex-wrap: wrap; 
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .cart-item-details {
+    flex-grow: 1;
+    width: 100%;
+    order: 1; 
+  }
+  
+  .cart-item-image {
+    order: 2; 
+  }
+
+  .cart-item-remove {
+    order: 3; 
+  }
+}
