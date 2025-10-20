@@ -1,0 +1,51 @@
+/* src/components/NavBar/NavBar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.navbar-links a {
+  color: #495057;
+  margin: 0 15px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+/* Estilo para el link activo, muy útil para la navegación */
+.navbar-links .active-link {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+
+.navbar-cart {
+  position: relative;
+  font-size: 1.5rem;
+}
+
+/* Círculo rojo para la cantidad de items en el carrito */
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
