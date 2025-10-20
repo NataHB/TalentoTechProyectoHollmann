@@ -1,14 +1,26 @@
 import { useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { AuthContext } from '../../context/AuthContext';
 import './ItemDetail.css';
 
 const ItemDetail = ({ product }) => {
   const { addItem } = useContext(CartContext);
-  
-  // Lógica simple para manejar la cantidad, se puede mejorar con un estado
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleAddToCart = () => {
-    addItem(product, 1); // Agregamos 1 unidad
-    alert(`Agregaste "${product.title}" al carrito.`);
+    if (isAuthenticated) {
+      addItem(product, 1);
+    } else {
+      navigate('/login', { 
+        state: { 
+          message: 'Debes iniciar sesión para agregar productos.',
+          from: location 
+        } 
+      });
+    }
   };
 
   return (

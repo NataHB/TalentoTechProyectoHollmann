@@ -1,5 +1,3 @@
-/* src/components/Item/Item.css */
-
 .item-card {
   background-color: #ffffff;
   border: 1px solid #e9ecef;
@@ -19,7 +17,7 @@
 .item-image {
   width: 100%;
   height: 250px;
-  object-fit: contain; /* Asegura que la imagen se vea completa sin deformarse */
+  object-fit: contain; 
   padding: 1rem;
   background-color: #fff;
 }
@@ -28,14 +26,14 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+  flex-grow: 1; 
 }
 
 .item-title {
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  flex-grow: 1; /* Empuja el precio y botón hacia abajo */
+  flex-grow: 1; 
 }
 
 .item-price {

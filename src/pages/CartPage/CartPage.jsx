@@ -26,7 +26,6 @@ const CartPage = () => {
       <button onClick={clearCart} className="add-to-cart-button" style={{ backgroundColor: '#dc3545' }}>
         Vaciar Carrito
       </button>
-      {/* Botón para simular la compra */}
       <button className="add-to-cart-button" style={{ marginLeft: '1rem' }}>
         Finalizar Compra
       </button>

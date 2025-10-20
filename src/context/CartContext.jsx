@@ -1,51 +1,61 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
+import { AuthContext } from './AuthContext';
 
-// 1. Crear el contexto
 export const CartContext = createContext();
 
-// 2. Crear el proveedor del contexto
-export const CartProvider = ({ children }) => {
-  // Estado para el carrito. Cumple Requerimiento #1.2 (useState)
-  const [cart, setCart] = useState([]);
+const getAllCarts = () => {
+  const cartsString = localStorage.getItem('userCarts');
+  return cartsString ? JSON.parse(cartsString) : {};
+};
 
-  // Función para agregar un item al carrito. Cumple Requerimiento #1.3 (evento de clic)
-  const addItem = (item, quantity) => {
-    if (isInCart(item.id)) {
-      // Si ya está, actualizamos la cantidad
-      const updatedCart = cart.map((prod) => {
-        if (prod.id === item.id) {
-          return { ...prod, quantity: prod.quantity + quantity };
-        }
-        return prod;
-      });
-      setCart(updatedCart);
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+      const allCarts = getAllCarts();
+      const userCart = allCarts[user.email] || [];
+      setCart(userCart);
     } else {
-      // Si no está, lo agregamos
-      setCart([...cart, { ...item, quantity }]);
+      setCart([]);
+    }
+  }, [user]);
+
+  const saveCart = (currentCart) => {
+    if (user) {
+      const allCarts = getAllCarts();
+      allCarts[user.email] = currentCart;
+      localStorage.setItem('userCarts', JSON.stringify(allCarts));
     }
   };
 
-  // Función para saber si un item ya está en el carrito
-  const isInCart = (id) => {
-    return cart.some((prod) => prod.id === id);
+  const addItem = (item, quantity) => {
+    const newCart = [...cart];
+    const itemIndex = newCart.findIndex(prod => prod.id === item.id);
+
+    if (itemIndex > -1) {
+      newCart[itemIndex].quantity += quantity;
+    } else {
+      newCart.push({ ...item, quantity });
+    }
+    setCart(newCart);
+    saveCart(newCart);
   };
 
-  // Función para remover un item
   const removeItem = (id) => {
-    setCart(cart.filter((prod) => prod.id !== id));
+    const newCart = cart.filter(prod => prod.id !== id);
+    setCart(newCart);
+    saveCart(newCart);
   };
     
-  // Función para limpiar el carrito
   const clearCart = () => {
     setCart([]);
+    saveCart([]);
   };
 
-  // Calculamos el total de items para el widget del Navbar
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-  // Calculamos el precio total
   const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
 
   return (
     <CartContext.Provider value={{ cart, addItem, removeItem, clearCart, totalItems, totalPrice }}>
