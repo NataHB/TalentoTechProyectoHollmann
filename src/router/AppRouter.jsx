@@ -6,6 +6,7 @@ import DetailPage from '../pages/DetailPage/ItemDetailContainer';
 import CartPage from '../pages/CartPage/CartPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import ProtectedRoute from './ProtectedRoute';
+import AdminPage from '../pages/AdminPage/AdminPage';
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
 
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
 
           <Route path="*" element={<h1>404 - Página no encontrada</h1>} />

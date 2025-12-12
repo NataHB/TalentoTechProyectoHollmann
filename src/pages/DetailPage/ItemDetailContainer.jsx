@@ -1,31 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '../../api/products';
+import { ProductContext } from '../../context/ProductContext'; // 1. Usamos el Contexto
 import ItemDetail from '../../components/ItemDetail/ItemDetail';
 import Loader from '../../components/Loader/Loader';
 
 const ItemDetailContainer = () => {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const { products, loading } = useContext(ProductContext);
   const { productId } = useParams();
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    getProductById(productId)
-      .then((data) => {
-        setProduct(data);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [productId]);
+    const found = products.find((item) => item.id === productId);
+    setProduct(found);
+  }, [products, productId]);
 
-  if (loading) return <Loader />;
-  if (error) return <h1>Error: {error}</h1>;
-  if (!product) return <h1>Producto no encontrado</h1>;
+  if (loading) {
+    return <Loader />;
+  }
 
-  return <ItemDetail product={product} />;
+  if (!product) {
+    return <div className="container"><h1>Producto no encontrado :(</h1></div>;
+  }
+
+  return (
+    <>
+      <ItemDetail product={product} />
+    </>
+  );
 };
 
 export default ItemDetailContainer;
