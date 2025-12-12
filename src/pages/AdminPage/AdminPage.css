@@ -1,0 +1,98 @@
+.admin-container {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h1 {
+    text-align: center;
+    color: #343a40;
+}
+
+.admin-container h2 {
+    margin-top: 2rem;
+    color: #495057;
+}
+
+/* Estilos de la Tabla */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.products-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+}
+
+.products-table tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Botones de acción dentro de la tabla */
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    transition: opacity 0.2s;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    /* Amarillo para editar */
+    color: #212529;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    /* Rojo para eliminar */
+    color: white;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.8;
+}
+
+/* Responsividad para la tabla en celulares */
+@media (max-width: 600px) {
+    .products-table thead {
+        display: none;
+        /* Ocultamos encabezados en pantallas muy chicas */
+    }
+
+    .products-table,
+    .products-table tbody,
+    .products-table tr,
+    .products-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .products-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #dee2e6;
+        padding: 10px;
+    }
+
+    .products-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+}

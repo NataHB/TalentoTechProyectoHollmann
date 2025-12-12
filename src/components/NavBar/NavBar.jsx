@@ -17,6 +17,7 @@ const NavBar = () => {
         <NavLink to="/" className={({ isActive }) => (isActive ? 'active-link' : '')}>Todos</NavLink>
         <NavLink to="/category/electronics" className={({ isActive }) => (isActive ? 'active-link' : '')}>Electrónica</NavLink>
         <NavLink to="/category/jewelery" className={({ isActive }) => (isActive ? 'active-link' : '')}>Joyería</NavLink>
+        {isAuthenticated && <NavLink to="/admin" className={({isActive}) => isActive ? 'active-link' : ''}>Admin</NavLink>}
       </div>
 
       <div className="navbar-user">
